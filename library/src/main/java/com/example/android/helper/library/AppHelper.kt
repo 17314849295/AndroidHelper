@@ -7,6 +7,7 @@ import android.os.Environment
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -97,4 +98,17 @@ fun Activity.shareImages(title: String = "Share image", vararg imageUris: Uri) {
         type = "image/*"
     }
     startActivity(Intent.createChooser(shareIntent, title))
+}
+
+fun Activity.openGooglePlay() {
+    try {
+        val intent = Intent(Intent.ACTION_VIEW, "market://details?id=$packageName".toUri())
+        startActivity(intent)
+    } catch (e: Exception) {
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            "https://play.google.com/store/apps/details?id=$packageName".toUri()
+        )
+        startActivity(intent)
+    }
 }
