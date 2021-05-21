@@ -22,11 +22,19 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 repositories {
     google()
-    jcenter()
+    mavenCentral()
     maven {
         name "Tapjoy's maven repo"
         url "https://sdk.tapjoy.com/"
